@@ -1,0 +1,8 @@
+#!/bin/bash
+# Sourced by EJBCA's start.sh for HSM-specific environment setup.
+# Place this file under /opt/<dir>/environment-hsm so start.sh picks it up.
+
+export SOFTHSM2_CONF=/etc/softhsmv3.conf
+export LD_LIBRARY_PATH=/opt/openssl/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+
+log "INFO" "SoftHSMv3 environment loaded. SOFTHSM2_CONF=${SOFTHSM2_CONF}"

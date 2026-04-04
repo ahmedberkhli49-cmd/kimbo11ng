@@ -1,0 +1,54 @@
+services:
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ejbca
+      POSTGRES_USER: ejbca
+      POSTGRES_PASSWORD: ejbca
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ejbca"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  ejbca:
+    image: ghcr.io/thpham/ejbca-ce:latest
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      args:
+        OPENSSL_VERSION: "3.6.0"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_JDBC_URL:    "jdbc:postgresql://postgres:5432/ejbca"
+      DATABASE_USER:        ejbca
+      DATABASE_PASSWORD:    ejbca
+      TLS_SETUP_ENABLED:    "simple"
+      EJBCA_ADMIN_ALLOW_ANY_IP: "true"
+      # SoftHSMv3 token credentials (used by init-softhsm.sh)
+      SOFTHSM_TOKEN_LABEL:  "TestToken"
+      SOFTHSM_TOKEN_PIN:    "1234"
+      SOFTHSM_TOKEN_SO_PIN: "12345678"
+    ports:
+      - "8080:8080"   # HTTP (redirect to HTTPS)
+      - "8443:8443"   # EJBCA admin HTTPS
+      - "9443:9443"   # RA/VA HTTPS
+    volumes:
+      - softhsm-tokens:/var/lib/softhsmv3/tokens
+      - ejbca-p12:/opt/keyfactor/ejbca/p12
+    healthcheck:
+      test: ["CMD", "curl", "-sk", "https://localhost:8443/ejbca/publicweb/healthcheck/ejbcahealth"]
+      interval: 30s
+      timeout: 10s
+      retries: 20
+      start_period: 120s
+
+volumes:
+  postgres-data:
+  softhsm-tokens:
+  ejbca-p12:

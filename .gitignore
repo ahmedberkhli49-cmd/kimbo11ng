@@ -1,0 +1,15 @@
+.omc/
+target/
+**/target/
+
+# EJBCA dependency JARs (extracted from base image via `just extract-jars`)
+deps/
+deps/**
+
+# reference sources (local only)
+.ref/
+.ref/**
+
+# Build artifacts
+*.class
+*.jar
